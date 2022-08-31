@@ -23,6 +23,15 @@ services:
       - postgres
     networks:
       - spider_web
+  frontend:
+    build: library_front/
+    restart: always
+    ports:
+      - '3000:3000'
+    depends_on:
+      - backend
+    networks:
+      - spider_web
 
 networks:
   spider_web:
