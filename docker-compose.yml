@@ -5,12 +5,27 @@ services:
     restart: always
     environment:
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_PASSWORD=password
       - POSTGRES_DB=library_db
       - POSTGRES_HOST_AUTH_METHOD=trust
     ports:
       - '5432:5432'
     volumes:
       - db:/var/lib/postgresql/data
+    networks:
+      - spider_web
+  backend:
+    build: library_back/
+    restart: always
+    ports:
+      - '8000:8000'
+    depends_on:
+      - postgres
+    networks:
+      - spider_web
+
+networks:
+  spider_web:
+
 volumes:
   db:
