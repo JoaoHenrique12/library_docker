@@ -5,6 +5,17 @@ Dockerização de projetos, uma criação da Moby Dick Studios.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 ![](https://static.wikia.nocookie.net/metalgear/images/c/c7/Moby.jpg/revision/latest/scale-to-width-down/819?cb=20150725142108)
 
+## Back
+- Alterei a dependência psycopg para psycopg-bin, isto facilita a instalação, já que assim é possível usar apenas o pip e não dar nenhum apt install de outras dependências para fazer este conector funcionar.
+- Para conectar o back no banco bastou alterar algumas variáveis de ambiente.
+
+## Front
+- Funciona, a pesar de ser uma aplicação escrita em javascript.
+![Screenshot from 2022-08-31 06-56-46](https://user-images.githubusercontent.com/42558165/187654037-3d7c7d2f-a881-45d9-9426-62ccd57aed05.png)
+
+![Screenshot from 2022-08-31 06-58-13](https://user-images.githubusercontent.com/42558165/187654108-88301533-b9fb-421c-9ade-8c3de746b311.png)
+
+
 | Item | Peso |
 |---|---|
 | 1. Containerização do Banco                      | 1.0 |
