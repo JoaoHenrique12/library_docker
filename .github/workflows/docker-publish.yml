@@ -10,32 +10,66 @@ on:
     - cron: '15 15 * * *'
   push:
     branches: [ "main" ]
-    # Publish semver tags as releases.
     tags: [ 'v*.*.*' ]
   pull_request:
     branches: [ "main" ]
 
 env:
-  # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
-  # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
 
 
 jobs:
-  build:
-
+  test_backend:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-      # This is used to complete the identity challenge
-      # with sigstore/fulcio when running outside of PRs.
-      id-token: write
 
+    container: python:3.9-slim
+
+    services:
+      postgres:
+        image: postgres
+        ports:
+          - 5433:5433
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: library_db
+          POSTGRES_HOST_AUTH_METHOD: trust
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-        
-      - name: Compose up
-        run: docker compose up -d
+
+      - name: Download Packages PIP
+        run: |
+          cd library_back
+          pip3 install -r requirements.txt
+
+      - name: Migrate
+        run: |
+          cd library_back
+          python manage.py makemigrations
+          python manage.py migrate
+
+
+      - name: Run tests
+        run: |
+          cd library_back
+          python3 manage.py test
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: library_db
+#  build:
+#
+#    runs-on: ubuntu-latest
+#    permissions:
+#      contents: read
+#      packages: write
+#      id-token: write
+#
+#    steps:
+#      - name: Checkout repository
+#        uses: actions/checkout@v3
+#        
+#      - name: Docker Compose up
+#        run: docker compose up -d
