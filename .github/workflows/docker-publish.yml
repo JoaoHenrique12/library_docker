@@ -72,17 +72,21 @@ jobs:
         run: |
           cd library_front
           npm install
-#  build:
-#
-#    runs-on: ubuntu-latest
-#    permissions:
-#      contents: read
-#      packages: write
-#      id-token: write
-#
-#    steps:
-#      - name: Checkout repository
-#        uses: actions/checkout@v3
-#        
-#      - name: Docker Compose up
-#        run: docker compose up -d
+      - name: Run tests
+        run: |
+          cd library_front
+          npm test
+  build:
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        
+      - name: Docker Compose up
+        run: docker compose up -d
