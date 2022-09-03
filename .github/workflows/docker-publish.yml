@@ -72,6 +72,12 @@ jobs:
         run: |
           cd library_front
           npm install
+
+      - name: Run lint
+        run: |
+          cd library_front
+          npm run lint src/
+
       - name: Run tests
         run: |
           cd library_front
