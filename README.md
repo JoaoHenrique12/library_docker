@@ -1,10 +1,4 @@
-# moby_dick
-Dockerização de projetos, uma criação da Moby Dick Studios.
-<hr>
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-![](https://static.wikia.nocookie.net/metalgear/images/c/c7/Moby.jpg/revision/latest/scale-to-width-down/819?cb=20150725142108)
-
+# Library Docker
 ## Back
 - Alterei a dependência psycopg para psycopg-bin, isto facilita a instalação, já que assim é possível usar apenas o pip e não dar nenhum apt install de outras dependências para fazer este conector funcionar.
 - Para conectar o back no banco bastou alterar algumas variáveis de ambiente.
